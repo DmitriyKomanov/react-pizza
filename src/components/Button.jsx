@@ -1,16 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const Button = (props) => {
+const Button = ({ onClick, className, outline, children }) => {
   return (
     <button
-      data-class={`button ${props.classMod && `button--${props.classMod}`}`}
-      className={classNames(
-        'button',
-        props.classMod && `button--${props.classMod}`
-      )}
+      onClick={onClick}
+      className={classNames('button', className, {
+        'button--outline': outline,
+      })}
     >
-      {props.children}
+      {children}
     </button>
   );
 };

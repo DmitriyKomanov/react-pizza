@@ -2,9 +2,17 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes, { number } from 'prop-types';
-import { LoadingBlock } from '..';
+import { Button, LoadingBlock } from '..';
 
-const PizzaBlock = ({ imageUrl, name, price, types, sizes, isLoading }) => {
+const PizzaBlock = ({
+  imageUrl,
+  name,
+  price,
+  types,
+  sizes,
+  isLoading,
+  onClickAddPizza,
+}) => {
   const availableTypes = ['тонкое', 'традиционное'];
   const availableSizes = [26, 30, 40];
   const [activeType, setActiveType] = useState(types[0]); // активный тип пиццы
@@ -54,7 +62,7 @@ const PizzaBlock = ({ imageUrl, name, price, types, sizes, isLoading }) => {
       </div>
       <div className='pizza-block__bottom'>
         <div className='pizza-block__price'>от {price} ₽</div>
-        <div className='button button--outline button--add'>
+        <Button onClick={onClickAddPizza} className='button--add' outline>
           <svg
             width='12'
             height='12'
@@ -69,7 +77,7 @@ const PizzaBlock = ({ imageUrl, name, price, types, sizes, isLoading }) => {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );
@@ -81,6 +89,7 @@ PizzaBlock.propTypes = {
   price: PropTypes.number.isRequired,
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   isLoaded: PropTypes.bool,
+  onAddPizza: PropTypes.func,
 };
 
 PizzaBlock.defaultProps = {
