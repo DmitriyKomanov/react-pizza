@@ -5,6 +5,7 @@ import PropTypes, { number } from 'prop-types';
 import { Button, LoadingBlock } from '..';
 
 const PizzaBlock = ({
+  id,
   imageUrl,
   name,
   price,
@@ -24,6 +25,18 @@ const PizzaBlock = ({
 
   const onSelectSize = (index) => {
     setActiveSize(index);
+  };
+
+  const onAddPizza = () => {
+    const obj = {
+      id,
+      name,
+      imageUrl,
+      price,
+      size: availableSizes[activeSize],
+      type: availableTypes[activeType],
+    };
+    onClickAddPizza(obj);
   };
 
   return (
@@ -62,7 +75,7 @@ const PizzaBlock = ({
       </div>
       <div className='pizza-block__bottom'>
         <div className='pizza-block__price'>от {price} ₽</div>
-        <Button onClick={onClickAddPizza} className='button--add' outline>
+        <Button onClick={onAddPizza} className='button--add' outline>
           <svg
             width='12'
             height='12'

@@ -60,7 +60,7 @@ const Home = () => {
         {isLoaded
           ? items.map((obj) => (
               <PizzaBlock
-                onClickAddPizza={() => console.log(123)}
+                onClickAddPizza={(obj) => console.log(obj)}
                 key={obj.id}
                 isLoading={true}
                 {...obj}
