@@ -6,16 +6,22 @@ const initialState = {
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_PIZZA_CART':
-      return {
+    case 'ADD_PIZZA_CART': {
+      const newItems = {
         ...state,
         items: {
-          [action.payload.id]: [
-            ...state.items[action.payload.id],
-            action.payload,
-          ],
+          ...state.items,
+          [action.payload.id]: !state.items[action.payload.id]
+            ? [action.payload]
+            : [...state.items[action.payload.id], action.payload],
         },
       };
+      return {
+        ...state,
+        items: newItems,
+        totalCount: Object.keys(newItems).length,
+      };
+    }
     default:
       return state;
   }
